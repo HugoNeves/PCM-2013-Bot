@@ -5,6 +5,7 @@ A bot written in AutoHotKey to automate the playing of successive stages in the 
 
 TODO:
 -------------
+* Fix the message box showing twice when stopping the bot;
 * Fix detection of stage being bugged when it's raining/snowing;
 * Support to multiple screen resolutions;
 * Support to choose game executable location  (through configuration files or through GUI);
