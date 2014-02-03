@@ -389,6 +389,7 @@ Loop
 	
 	Sleep, 5000
 }
+return
 ;;;;;;;;;;;;;;;; RUNNING BOT CODE ;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;; STOPPING BOT CODE ;;;;;;;;;;;;;;;;
@@ -396,4 +397,5 @@ Loop
 MsgBox, Bot stopped!
 LogMessage("Bot stopped", "true")
 run := "false"
+return
 ;;;;;;;;;;;;;;;; STOPPING BOT CODE ;;;;;;;;;;;;;;;;

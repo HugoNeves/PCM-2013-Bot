@@ -1,11 +1,10 @@
 Pro Cycling Manager 2013 Bot
 ============
 
-A bot written in AutoHotKey to automate the playing of successive stages in the game Pro Cycling Manager 2013.
+A bot written in AutoHotkey to automate the playing of successive stages in the game Pro Cycling Manager 2013.
 
 TODO:
 -------------
-* Fix the message box showing twice when stopping the bot;
 * Fix detection of stage being bugged when it's raining/snowing;
 * Support to multiple screen resolutions;
 * Support to choose game executable location  (through configuration files or through GUI);
