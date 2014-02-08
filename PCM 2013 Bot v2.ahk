@@ -11,15 +11,10 @@ colorBtnConnectionHasFailed := 0x22E6FE
 posBtnConnectionHasFailedX := 1014
 posBtnConnectionHasFailedY := 582
 
-; YOU WERE DISCONNECTED
+; YOU WERE DISCONNECTED / PROFILE ALREADY CONNECTED
 colorBtnYouWereDisconnected := 0x22E6FE
 posBtnYouWereDisconnectedX := 1008
 posBtnYouWereDisconnectedY := 567
-
-; PROFILE ALREADY CONNECTED (I think it's the same from disconnected, but not sure)
-colorBtnProfileAlreadyConnected := TODO
-posBtnProfileAlreadyConnectedX := TODO
-posBtnProfileAlreadyConnectedY := TODO
 
 ; GAME PORTS/YOU LEFT EARLY BUTTON
 colorBtnGamePorts := 0x22E6FE
@@ -183,11 +178,11 @@ Loop
 			{
 				stageFound := "false"
 				
-				; Message you were disconnected, clicking ok
+				; Message you were disconnected OR profile already connected, clicking ok
 				colorAtBtnYouWereDisconnected := MoveAndGetColorAt(posBtnYouWereDisconnectedX, posBtnYouWereDisconnectedY)
 				if (colorAtBtnYouWereDisconnected = colorBtnYouWereDisconnected)
 				{
-					ClickAndSleep(posBtnYouWereDisconnectedX, posBtnYouWereDisconnectedY, 5000, "Clicking ok at being disconnected", "false")
+					ClickAndSleep(posBtnYouWereDisconnectedX, posBtnYouWereDisconnectedY, 5000, "Clicking ok at being disconnected OR at profile being already connected", "false")
 					Continue
 				}
 			
@@ -206,14 +201,6 @@ Loop
 					ClickAndSleep(posBtnConnectionHasFailedX, posBtnConnectionHasFailedY, 5000, "Clicking 'Ok' at connection failed", "false")
 					Continue
 				}
-				
-				; Message profile already connected, clicking ok
-				;colorAtBtnProfileAlreadyConnected := MoveAndGetColorAt(posBtnProfileAlreadyConnectedX, posBtnProfileAlreadyConnectedY)
-				;if (colorAtBtnProfileAlreadyConnected = colorBtnProfileAlreadyConnected)
-				;{
-				;	ClickAndSleep(posBtnProfileAlreadyConnectedX, posBtnProfileAlreadyConnectedY, 60000, "Clicking ok at being already connected", "false")
-				;	Continue
-				;}
 				
 				; Message test of game ports open, or message you left early, clicking ok
 				colorAtPosBtnGamePorts := MoveAndGetColorAt(posBtnGamePortsX, posBtnGamePortsY)
@@ -241,8 +228,17 @@ Loop
 					LogMessage("State -> searching", "true")
 					ClickAndSleep(posBtnLookGameX, posBtnLookGameY, 300000, "Clicking 'Look for a game'", "true")
 					Continue
-				} 
+				}
 
+				; Safe check to verify if user started bot already searching for a game, but a stage was not found/loaded yet
+				if ((colorAtBtnLookGame = colorBtnLookGame) and (colorAtLookInProgress != colorLookInProgress))
+				{
+					previousTime := A_Now
+					state := "searching"
+					LogMessage("State -> searching", "true")
+					Continue
+				}
+				
 				; Stages menu (outside or inside of play tab), clicking play
 				colorAtPosBtnPlay := MoveAndGetColorAt(posBtnPlayX, posBtnPlayY)	
 				if (colorAtPosBtnPlay = colorBtnPlay)
